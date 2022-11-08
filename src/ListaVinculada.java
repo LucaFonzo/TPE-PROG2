@@ -86,6 +86,21 @@ public class ListaVinculada implements Iterable<Comparable>{
         }
         return size;
     }
+    public void sort(){
+        for (Nodo i = this.primerNodo;i != null;i.getNodoSiguente()){
+            for (Nodo j = i.getNodoSiguente();j != null;j.getNodoSiguente()){
+                int aux = this.ordenador.compare(i,j);
+                if (aux > 1){
+                    //I ES MAYOR A J
+                }else if (aux < 1){
+                    //I ES MENOR A J
+                }else {
+                    //SON IGUALES
+                }
+            }
+        }
+
+    }
 
     public boolean estaVacia(){
         if (this.primerNodo == null){
