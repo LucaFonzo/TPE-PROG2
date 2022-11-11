@@ -18,6 +18,9 @@ public class Nodo {
     public void setNodoSiguente(Nodo nodoSiguente){
         this.nodoSiguente = nodoSiguente;
     }
+    public void  setValor(Comparable valor){
+        this.valor = valor;
+    }
 
 
     @Override

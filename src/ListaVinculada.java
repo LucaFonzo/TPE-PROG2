@@ -8,6 +8,10 @@ public class ListaVinculada implements Iterable<Comparable>{
         this.primerNodo = null;
         this.ordenador = null;
     }
+    public void setOrdenador(Comparator ordenador){
+        this.ordenador = ordenador;
+        this.sort();
+    }
 
     public Comparable get(int index){
         int contador = 0;
@@ -32,16 +36,24 @@ public class ListaVinculada implements Iterable<Comparable>{
         return -1;
     }
 
-    public void setOrdenador(Comparator ordenador){
-        this.ordenador = ordenador;
-    }
-
     public void add(Comparable valor){
-        if (this.estaVacia()){
+        if (this.primerNodo == null){
             this.primerNodo = new Nodo(valor);
-        }else {
+        }else if (this.ordenador.compare(this.primerNodo.getValor(),valor) >= 1){
+            Nodo nuevoNodo = new Nodo(valor);
+            nuevoNodo.setNodoSiguente(this.primerNodo);
+            this.primerNodo = nuevoNodo;
+        }
+        else {
             Nodo aux = this.primerNodo;
             while (aux.getNodoSiguente() != null){
+                if (this.ordenador.compare(valor,aux.getValor()) >= 1 || this.ordenador.compare(valor,aux.getValor()) == 0 ){
+                    Nodo nuevoNodo = new Nodo(valor);
+                    Nodo tmp = aux.getNodoSiguente();
+                    aux.setNodoSiguente(nuevoNodo);
+                    nuevoNodo.setNodoSiguente(tmp);
+                    return;
+                }
                 aux = aux.getNodoSiguente();
             }
             Nodo nuevoNodo = new Nodo(valor);
@@ -66,8 +78,11 @@ public class ListaVinculada implements Iterable<Comparable>{
     }
 
     public void removeAllElements(Comparable valor){
+        while (this.primerNodo.getValor().equals(valor)){
+            this.primerNodo = this.primerNodo.getNodoSiguente();
+        }
         Nodo aux = this.primerNodo;
-        while (aux != null){
+        while (aux.getNodoSiguente() != null){
             if (aux.getNodoSiguente().getValor().equals(valor)){
                 Nodo nodoAEliminar = aux.getNodoSiguente();
                 aux.setNodoSiguente(nodoAEliminar.getNodoSiguente());
@@ -86,27 +101,27 @@ public class ListaVinculada implements Iterable<Comparable>{
         }
         return size;
     }
-    public void sort(){
-        for (Nodo i = this.primerNodo;i != null;i.getNodoSiguente()){
-            for (Nodo j = i.getNodoSiguente();j != null;j.getNodoSiguente()){
-                int aux = this.ordenador.compare(i,j);
-                if (aux > 1){
-                    //I ES MAYOR A J
-                }else if (aux < 1){
-                    //I ES MENOR A J
-                }else {
-                    //SON IGUALES
-                }
-            }
-        }
-
-    }
-
     public boolean estaVacia(){
         if (this.primerNodo == null){
             return true;
         }
         return false;
+    }
+    public void sort(){
+        for (int i = 0; i < this.size();i++) {
+            Nodo nodoActual = this.primerNodo;
+            Nodo aux = this.primerNodo.getNodoSiguente();
+            for (int j = 0; j < this.size() - 1; j++) {
+                int result = this.ordenador.compare(nodoActual.getValor(),aux.getValor());
+                if (result >= 1) {
+                    Comparable temp = nodoActual.getValor();
+                    nodoActual.setValor(aux.getValor());
+                    aux.setValor(temp);
+                }
+                nodoActual = aux;
+                aux = aux.getNodoSiguente();
+            }
+        }
     }
 
     @Override

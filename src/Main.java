@@ -1,26 +1,20 @@
+import comparadores.ComparadorIntegers;
+import comparadores.ComparadorNot;
+
+import java.util.Comparator;
+
 public class Main {
     public static void main(String[] args) {
-        ListaVinculada listaVinculada = new ListaVinculada();
-
-        System.out.println("Esta vacio: " + listaVinculada.estaVacia());
-
-
-        listaVinculada.add(6);
-        listaVinculada.add(5);
-        listaVinculada.add(4);
-        listaVinculada.add(3);
-        listaVinculada.add(2);
-        listaVinculada.add(1);
-
-        Integer valor = 1;
-        for (Comparable lista:listaVinculada){
-            System.out.println(lista);
+        ListaVinculada listaIntegers = new ListaVinculada();
+        ComparadorIntegers comparadorIntegers = new ComparadorIntegers();
+        listaIntegers.setOrdenador(comparadorIntegers);
+        listaIntegers.add(10);
+        listaIntegers.add(21);
+        listaIntegers.add(1);
+        listaIntegers.add(5);
+        listaIntegers.add(11);
+        for (Comparable i:listaIntegers){
+            System.out.println(i);
         }
-        System.out.println("----------");
-        listaVinculada.removeAllElements(valor);
-        for (int i = 0;i < listaVinculada.size();i++){
-            System.out.println(listaVinculada.get(i));
-        }
-        System.out.println("Esta vacio: " + listaVinculada.estaVacia());
     }
 }
