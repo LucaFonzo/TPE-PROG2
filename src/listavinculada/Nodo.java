@@ -1,10 +1,10 @@
-import java.util.Objects;
+package listavinculada;
 
 public class Nodo {
     private Nodo nodoSiguente;
-    private Comparable valor;
+    private Object valor;
 
-    public Nodo(Comparable valor){
+    public Nodo(Object valor){
         this.valor = valor;
         this.nodoSiguente = null;
     }
@@ -12,13 +12,13 @@ public class Nodo {
     public Nodo getNodoSiguente() {
         return this.nodoSiguente;
     }
-    public Comparable getValor() {
+    public Object getValor() {
         return this.valor;
     }
     public void setNodoSiguente(Nodo nodoSiguente){
         this.nodoSiguente = nodoSiguente;
     }
-    public void  setValor(Comparable valor){
+    public void  setValor(Object valor){
         this.valor = valor;
     }
 

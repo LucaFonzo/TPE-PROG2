@@ -1,6 +1,8 @@
+package alumno;
+
 import java.util.ArrayList;
 
-public class Alumno {
+public class Alumno extends ElementoGrupo {
     private String nombre;
     private String apellido;
     private Integer dni;
@@ -27,4 +29,14 @@ public class Alumno {
     public Integer getDni() {
         return dni;
     }
+
+    public void addPalabra(String palabra){
+        this.palabras.add(palabra);
+    }
+
+    @Override
+    public int getCantidadAlumnos() {
+        return 1;
+    }
+
 }
