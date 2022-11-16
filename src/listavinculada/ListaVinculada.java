@@ -50,12 +50,20 @@ public class ListaVinculada implements Iterable<Object>{
             this.setPrimerNodo(nuevoNodo);
         }
         else {
-            Nodo aux = this.primerNodo;
-            while (aux.getNodoSiguente() != null){
-                aux = aux.getNodoSiguente();
+            Nodo actual = this.primerNodo;
+            Nodo tmp = null;
+            while (actual != null && this.ordenador.compare(actual.getValor(),nuevoNodo.getValor()) < 0){
+                tmp = actual;
+                actual = actual.getNodoSiguente();
             }
-            aux.setNodoSiguente(nuevoNodo);
-            this.sort();
+            if (actual == null){
+                tmp.setNodoSiguente(nuevoNodo);
+            }else {
+                Nodo nodoSiguente = tmp.getNodoSiguente();
+                nuevoNodo.setNodoSiguente(nodoSiguente);
+                tmp.setNodoSiguente(nuevoNodo);
+            }
+
         }
     }
 
@@ -75,8 +83,8 @@ public class ListaVinculada implements Iterable<Object>{
         }
     }
 
-    public void removeAllElements(Comparable valor){
-        while (this.primerNodo.getValor().equals(valor)){
+    public void removeAllElements(Object valor){
+        if (this.primerNodo.getValor().equals(valor)){
             this.primerNodo = this.primerNodo.getNodoSiguente();
         }
         Nodo aux = this.primerNodo;
@@ -128,13 +136,16 @@ public class ListaVinculada implements Iterable<Object>{
     }
     private class IteradorListaVinculada implements Iterator<Object>{
         private int pos;
+        private int size;
         public IteradorListaVinculada(){
             this.pos = 0;
+            this.size = size();
+
         }
 
         @Override
         public boolean hasNext() {
-            return this.pos < size();
+            return this.pos < this.size;
         }
 
         @Override
