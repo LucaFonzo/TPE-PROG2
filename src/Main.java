@@ -1,4 +1,5 @@
 import alumno.Alumno;
+import alumno.ElementoGrupo;
 import alumno.GrupoAlumno;
 import comparadores.ComparadorCantAlumnos;
 import comparadores.ComparadorIntegers;
@@ -10,44 +11,57 @@ import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
-        ListaVinculada listaIntegers = new ListaVinculada();
         ComparadorIntegers comparadorIntegers = new ComparadorIntegers();
-        listaIntegers.setOrdenador(comparadorIntegers);
+        ListaVinculada<Integer> listaIntegers = new ListaVinculada(comparadorIntegers);
         listaIntegers.add(10);
         listaIntegers.add(21);
         listaIntegers.add(1);
         listaIntegers.add(5);
         listaIntegers.add(11);
-        for (Object i:listaIntegers){
+
+        //MOSTRAR LISTA
+        for (Integer i:listaIntegers){
             System.out.println(i);
         }
+
         System.out.println("-------------");
         listaIntegers.remove(0);
         listaIntegers.removeAllElements(5);
         listaIntegers.removeAllElements(11);
-        for (Object i:listaIntegers){
+
+        //MOSTAR LISTA
+        for (Integer i:listaIntegers){
             System.out.println(i);
         }
+
         System.out.println("-------------");
         Comparator ordenadorString = new ComparadorStrings();
-        ListaVinculada listaString = new ListaVinculada();
-        listaString.setOrdenador(ordenadorString);
+        ListaVinculada<String> listaString = new ListaVinculada(ordenadorString);
         listaString.add("Facil");
         listaString.add("Es");
         listaString.add("Parcial");
         listaString.add("Prog 2");
-        for (Object i:listaString){
+
+
+        //MOSTRAR LISTA
+        for (String i:listaString){
             System.out.println(i);
         }
+
+
         System.out.println("-------------");
         System.out.println("Pos parcial:" + listaString.getIndex("Parcial"));
         System.out.println("Pos recuperatorio: " + listaString.getIndex("Recuperatorio"));
         Comparator comparadorDescendienteString = new ComparadorNot(ordenadorString);
         listaString.setOrdenador(comparadorDescendienteString);
         System.out.println("-------------");
-        for (Object i:listaString){
+
+        //MOSTRAR LISTA
+        for (String i:listaString){
             System.out.println(i);
         }
+
+
         System.out.println("-------------");
         GrupoAlumno unicen = new GrupoAlumno();
 
@@ -119,14 +133,15 @@ public class Main {
         losFibo.add(issacNewton);
 
         olimpiadasMatematicas.add(losFibo);
-
-        ListaVinculada listaGrupos = new ListaVinculada();
         Comparator comparatorAlumnos = new ComparadorCantAlumnos();
+        ListaVinculada<ElementoGrupo> listaGrupos = new ListaVinculada(comparatorAlumnos);
         listaGrupos.setOrdenador(comparatorAlumnos);
         listaGrupos.add(unicen);
         listaGrupos.add(olimpiadasMatematicas);
-        for (Object i:listaGrupos){
+        //MOSTRAR LISTA
+        for (ElementoGrupo i:listaGrupos){
             System.out.println(i);
         }
+
     }
 }

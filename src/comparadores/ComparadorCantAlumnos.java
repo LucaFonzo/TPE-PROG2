@@ -4,6 +4,6 @@ import alumno.ElementoGrupo;
 public class ComparadorCantAlumnos implements Comparator<ElementoGrupo> {
     @Override
     public int compare(ElementoGrupo o1, ElementoGrupo o2) {
-        return o1.getCantidadAlumnos() - o2.getCantidadAlumnos();
+        return  o2.getCantidadAlumnos() - o1.getCantidadAlumnos();
     }
 }

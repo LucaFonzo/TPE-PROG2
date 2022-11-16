@@ -3,14 +3,14 @@ package listavinculada;
 import java.util.Comparator;
 import java.util.Iterator;
 
-public class ListaVinculada implements Iterable<Object>{
-    private Nodo primerNodo;
-    private Comparator ordenador;
-    public ListaVinculada(){
+public class ListaVinculada<T> implements Iterable<T> {
+    private Nodo<T> primerNodo;
+    private Comparator<T> ordenador;
+    public ListaVinculada(Comparator ordenador){
         this.primerNodo = null;
-        this.ordenador = null;
+        this.ordenador = ordenador;
     }
-    public void setOrdenador(Comparator ordenador){
+    public void setOrdenador(Comparator<T> ordenador){
         this.ordenador = ordenador;
         this.sort();
     }
@@ -28,7 +28,7 @@ public class ListaVinculada implements Iterable<Object>{
         return aux.getValor();
     }
 
-    public int getIndex(Object valor){
+    public int getIndex(T valor){
         int index = 0;
         Nodo aux = this.primerNodo;
         while (aux != null){
@@ -41,18 +41,18 @@ public class ListaVinculada implements Iterable<Object>{
         return -1;
     }
 
-    public void add(Object valor){
+    public void add(T valor){
         Nodo nuevoNodo = new Nodo(valor);
         if (this.primerNodo == null){
             this.setPrimerNodo(nuevoNodo);
-        }else if (this.ordenador.compare(this.primerNodo.getValor(),valor) >= 1){
+        }else if (this.ordenador.compare(this.primerNodo.getValor(),(T)nuevoNodo.getValor()) >= 1){
             nuevoNodo.setNodoSiguente(this.primerNodo);
             this.setPrimerNodo(nuevoNodo);
         }
         else {
             Nodo actual = this.primerNodo;
             Nodo tmp = null;
-            while (actual != null && this.ordenador.compare(actual.getValor(),nuevoNodo.getValor()) < 0){
+            while (actual != null && this.ordenador.compare((T) actual.getValor(), (T) nuevoNodo.getValor()) < 0){
                 tmp = actual;
                 actual = actual.getNodoSiguente();
             }
@@ -118,7 +118,7 @@ public class ListaVinculada implements Iterable<Object>{
             Nodo nodoActual = this.primerNodo;
             Nodo aux = this.primerNodo.getNodoSiguente();
             for (int j = 0; j < this.size() - 1; j++) {
-                int result = this.ordenador.compare(nodoActual.getValor(),aux.getValor());
+                int result = this.ordenador.compare((T) nodoActual.getValor(),(T) aux.getValor());
                 if (result >= 1) {
                     Object temp = nodoActual.getValor();
                     nodoActual.setValor(aux.getValor());
@@ -130,28 +130,16 @@ public class ListaVinculada implements Iterable<Object>{
         }
     }
 
-    @Override
-    public Iterator<Object> iterator() {
-        return new IteradorListaVinculada();
+    public void mostrarLista(){
+        Iterator iteradorListaVinculada = new IteradorListaVinculada(this.primerNodo);
+        while (iteradorListaVinculada.hasNext()){
+            Object i = iteradorListaVinculada.next();
+            System.out.println(i);
+        }
     }
-    private class IteradorListaVinculada implements Iterator<Object>{
-        private int pos;
-        private int size;
-        public IteradorListaVinculada(){
-            this.pos = 0;
-            this.size = size();
 
-        }
-
-        @Override
-        public boolean hasNext() {
-            return this.pos < this.size;
-        }
-
-        @Override
-        public Object next() {
-            pos++;
-            return get(pos - 1);
-        }
+    @Override
+    public Iterator<T> iterator() {
+        return new IteradorListaVinculada(this.primerNodo);
     }
 }
