@@ -2,9 +2,9 @@ package comparadores;
 
 import java.util.Comparator;
 
-public class ComparadorNot implements Comparator {
+public class ComparadorInverso implements Comparator {
     private Comparator comparator;
-    public ComparadorNot(Comparator comparator){
+    public ComparadorInverso(Comparator comparator){
         this.comparator = comparator;
     }
     @Override

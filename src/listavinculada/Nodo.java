@@ -1,7 +1,7 @@
 package listavinculada;
 
 public class Nodo<T> {
-    private Nodo nodoSiguente;
+    private Nodo<T> nodoSiguente;
     private T valor;
 
     public Nodo(T valor){

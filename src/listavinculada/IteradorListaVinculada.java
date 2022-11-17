@@ -2,7 +2,7 @@ package listavinculada;
 
 import java.util.Iterator;
 
-public class IteradorListaVinculada<T> implements Iterator<T> {
+public class IteradorListaVinculada<T> implements Iterator {
     private Nodo cursor;
 
     public IteradorListaVinculada(Nodo cursor){

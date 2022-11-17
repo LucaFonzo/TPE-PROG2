@@ -3,7 +3,7 @@ import alumno.ElementoGrupo;
 import alumno.GrupoAlumno;
 import comparadores.ComparadorCantAlumnos;
 import comparadores.ComparadorIntegers;
-import comparadores.ComparadorNot;
+import comparadores.ComparadorInverso;
 import comparadores.ComparadorStrings;
 import listavinculada.ListaVinculada;
 
@@ -52,7 +52,7 @@ public class Main {
         System.out.println("-------------");
         System.out.println("Pos parcial:" + listaString.getIndex("Parcial"));
         System.out.println("Pos recuperatorio: " + listaString.getIndex("Recuperatorio"));
-        Comparator comparadorDescendienteString = new ComparadorNot(ordenadorString);
+        Comparator comparadorDescendienteString = new ComparadorInverso(ordenadorString);
         listaString.setOrdenador(comparadorDescendienteString);
         System.out.println("-------------");
 

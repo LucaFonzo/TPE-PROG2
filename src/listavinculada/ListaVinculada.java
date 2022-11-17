@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class ListaVinculada<T> implements Iterable<T> {
     private Nodo<T> primerNodo;
     private Comparator<T> ordenador;
-    public ListaVinculada(Comparator ordenador){
+    public ListaVinculada(Comparator<T> ordenador){
         this.primerNodo = null;
         this.ordenador = ordenador;
     }
@@ -14,7 +14,7 @@ public class ListaVinculada<T> implements Iterable<T> {
         this.ordenador = ordenador;
         this.sort();
     }
-    public void setPrimerNodo(Nodo nuevoNodo){
+    private void setPrimerNodo(Nodo nuevoNodo){
         this.primerNodo = nuevoNodo;
     }
 
@@ -114,10 +114,11 @@ public class ListaVinculada<T> implements Iterable<T> {
         return false;
     }
     public void sort(){
-        for (int i = 0; i < this.size();i++) {
+        int size = this.size();
+        for (int i = 0; i < size;i++) {
             Nodo nodoActual = this.primerNodo;
             Nodo aux = this.primerNodo.getNodoSiguente();
-            for (int j = 0; j < this.size() - 1; j++) {
+            for (int j = 0; j < size - 1; j++) {
                 int result = this.ordenador.compare((T) nodoActual.getValor(),(T) aux.getValor());
                 if (result >= 1) {
                     Object temp = nodoActual.getValor();
