@@ -142,6 +142,5 @@ public class Main {
         for (ElementoGrupo i:listaGrupos){
             System.out.println(i);
         }
-
     }
 }

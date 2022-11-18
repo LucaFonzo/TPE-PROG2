@@ -1,18 +1,22 @@
 package alumno;
 
+import comparadores.ComparadorStrings;
+import listavinculada.ListaVinculada;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Alumno extends ElementoGrupo {
     private String nombre;
     private String apellido;
     private Integer dni;
-    private ArrayList<String> palabras;
+    private ListaVinculada<String> palabras;
 
     public Alumno(String nombre, String apellido, Integer dni) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.palabras = new ArrayList<>();
+        this.palabras = new ListaVinculada<>(new ComparadorStrings());
     }
 
     public boolean tienePalabra(String palabraBuscada){

@@ -98,6 +98,17 @@ public class ListaVinculada<T> implements Iterable<T> {
         }
     }
 
+    public boolean contains(T valor){
+        Nodo aux = this.primerNodo;
+        while (aux != null){
+            if (aux.getValor().equals(valor)){
+                return true;
+            }
+            aux = aux.getNodoSiguente();
+        }
+        return false;
+    }
+
     public int size(){
         int size = 0;
         Nodo aux = this.primerNodo;
